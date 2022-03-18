@@ -14,19 +14,30 @@ public struct RangeSlider: View {
     
     public let bounds: ClosedRange<Float>
     
+    public let tintColor: Color
+    
+    public let unableTintColor: Color
+    
     public let onEditingChanged: (_ isHigh: Bool, _ isEditing: Bool) -> Void
     
-    public init(highValue: Binding<Float>, lowValue: Binding<Float>, bounds: ClosedRange<Float>, onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
+    public init(highValue: Binding<Float>,
+                lowValue: Binding<Float>,
+                bounds: ClosedRange<Float>,
+                tintColor: Color = Color.blue,
+                unableTintColor: Color = Color(UIColor.label.withAlphaComponent(0.15)),
+                onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
         _highValue = highValue
         _lowValue = lowValue
         self.bounds = bounds
+        self.tintColor = tintColor
+        self.unableTintColor = unableTintColor
         self.onEditingChanged = onEditingChanged
     }
     
     public var body: some View {
         GeometryReader { geometry in
             // Circleが外にはみ出してしまうため、diameterを引く
-            RangeSliderContentView(currentHighPosition: $highValue, currentLowPosition: $lowValue, width: geometry.size.width - SliderHandleViewModel.diameter, bounds: bounds) { isHigh, isEditing in
+            RangeSliderContentView(currentHighPosition: $highValue, currentLowPosition: $lowValue, width: geometry.size.width - SliderHandleViewModel.diameter, bounds: bounds, tintColor: tintColor, unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)
             }
             // 真ん中にする

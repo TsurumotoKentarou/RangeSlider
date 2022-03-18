@@ -14,6 +14,10 @@ struct RangeSliderContentView: View {
     
     let width: CGFloat
     
+    let tintColor: Color
+    
+    let unableTintColor: Color
+    
     let onEditingChanged: (_ isHigh: Bool, _ isEditing: Bool) -> Void
     
     static let sliderHeight: CGFloat = 4.0
@@ -22,8 +26,16 @@ struct RangeSliderContentView: View {
     
     @StateObject var highViewModel: SliderHandleViewModel
     
-    init(currentHighPosition: Binding<Float>, currentLowPosition: Binding<Float>, width: CGFloat, bounds: ClosedRange<Float>,  onEditingChanged:  @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
+    init(currentHighPosition: Binding<Float>,
+         currentLowPosition: Binding<Float>,
+         width: CGFloat,
+         bounds: ClosedRange<Float>,
+         tintColor: Color,
+         unableTintColor: Color,
+         onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
         self.width = width
+        self.tintColor = tintColor
+        self.unableTintColor = unableTintColor
         _highValue = currentHighPosition
         _lowValue = currentLowPosition
         self.onEditingChanged = onEditingChanged
@@ -34,11 +46,14 @@ struct RangeSliderContentView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 8)
-            .fill(Color.gray.opacity(0.1))
+            .fill(unableTintColor)
             .frame(width: width, height: RangeSliderContentView.sliderHeight)
             .overlay(
                 ZStack() {
-                    SliderPathView(currentHighLocation: highViewModel.currentLocation, currentLowLocation: lowViewModel.currentLocation, height: RangeSliderContentView.sliderHeight)
+                    SliderPathView(currentHighLocation: highViewModel.currentLocation,
+                                   currentLowLocation: lowViewModel.currentLocation,
+                                   height: RangeSliderContentView.sliderHeight,
+                                   tintColor: tintColor)
                     
                     SliderHandleView(viewModel: lowViewModel)
                         .highPriorityGesture(DragGesture().onChanged({ value in

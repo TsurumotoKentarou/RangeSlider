@@ -14,11 +14,13 @@ struct SliderPathView: View {
     
     let height: CGFloat
     
+    let tintColor: Color
+    
     var body: some View {
         Path { path in
             path.move(to: currentLowLocation)
             path.addLine(to: currentHighLocation)
         }
-        .stroke(Color.blue, lineWidth: height)
+        .stroke(tintColor, lineWidth: height)
     }
 }

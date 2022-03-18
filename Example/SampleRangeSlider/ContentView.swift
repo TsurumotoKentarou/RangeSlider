@@ -20,6 +20,8 @@ struct ContentView: View {
                 print(highStr + " " + editStr + " \(value)")
             })
             
+            Slider(value: .constant(0.5))
+            
             HStack {
                 Text(String(format: "%.2f", lowValue))
                 Spacer()
