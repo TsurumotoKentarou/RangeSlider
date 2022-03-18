@@ -44,8 +44,7 @@ public struct RangeSlider: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            // Circleが外にはみ出してしまうため、diameterを引く
-            RangeSliderContentView(currentHighPosition: $highValue, currentLowPosition: $lowValue, width: geometry.size.width - SliderHandleViewModel.diameter, bounds: bounds, tintColor: tintColor, unableTintColor: unableTintColor) { isHigh, isEditing in
+            RangeSliderContentView(currentHighPosition: $highValue, currentLowPosition: $lowValue, width: geometry.size.width, bounds: bounds, tintColor: tintColor, unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)
             }
             // 真ん中にする

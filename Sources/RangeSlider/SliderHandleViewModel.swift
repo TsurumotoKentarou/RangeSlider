@@ -16,13 +16,22 @@ class SliderHandleViewModel: ObservableObject {
     // Slider Range
     let sliderRange: ClosedRange<Float>
     
+    // Slider limit location
+    private var minLocationX: CGFloat {
+        return SliderHandleViewModel.diameter / 2
+    }
+    private var maxLocationX: CGFloat {
+        return sliderWidth - SliderHandleViewModel.diameter / 2
+    }
+    
     // Slider circle diameter
     static let diameter: CGFloat = 28
     
     // Current Slider Location
     @Published var currentLocation: CGPoint {
         didSet {
-            let percent = Float(currentLocation.x / sliderWidth)
+            // diameter分位置がずれているので、最小値を0にしてからパーセント計算をする
+            let percent = Float((currentLocation.x - minLocationX) / (maxLocationX - minLocationX))
             currentValue = (sliderRange.upperBound - sliderRange.lowerBound) * percent + sliderRange.lowerBound
         }
     }
@@ -35,7 +44,7 @@ class SliderHandleViewModel: ObservableObject {
         self.sliderHeight = sliderHeight
         self.sliderRange = sliderRange
         
-        let x: CGFloat = max(min(startLocation, sliderWidth), 0.0)
+        let x = max(min(startLocation, sliderWidth - SliderHandleViewModel.diameter / 2), SliderHandleViewModel.diameter / 2)
         self.currentLocation = CGPoint(x: x, y: sliderHeight / 2)
     }
     
@@ -48,7 +57,7 @@ class SliderHandleViewModel: ObservableObject {
     }
     
     private func updateLocation(_ dragLocation: CGPoint) {
-        let x = max(min(dragLocation.x, sliderWidth), 0.0)
+        let x = max(min(dragLocation.x, maxLocationX), minLocationX)
         let y = sliderHeight / 2
         currentLocation = CGPoint(x: x, y: y)
     }
