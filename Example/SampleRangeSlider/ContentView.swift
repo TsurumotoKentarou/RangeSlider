@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import RangeSlider
 
 struct ContentView: View {
     @State var highValue: Float = 0.0

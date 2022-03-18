@@ -14,7 +14,6 @@
 		032EF15527E44FFE007F2A77 /* SampleRangeSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF15427E44FFE007F2A77 /* SampleRangeSliderTests.swift */; };
 		032EF15F27E44FFE007F2A77 /* SampleRangeSliderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF15E27E44FFE007F2A77 /* SampleRangeSliderUITests.swift */; };
 		032EF16127E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF16027E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift */; };
-		032EF16F27E4501C007F2A77 /* SliderHandleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF16E27E4501C007F2A77 /* SliderHandleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,7 +44,6 @@
 		032EF15A27E44FFE007F2A77 /* SampleRangeSliderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleRangeSliderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		032EF15E27E44FFE007F2A77 /* SampleRangeSliderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRangeSliderUITests.swift; sourceTree = "<group>"; };
 		032EF16027E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRangeSliderUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		032EF16E27E4501C007F2A77 /* SliderHandleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +94,6 @@
 		032EF14227E44FFD007F2A77 /* SampleRangeSlider */ = {
 			isa = PBXGroup;
 			children = (
-				032EF16D27E4501C007F2A77 /* ViewModel */,
 				032EF14327E44FFD007F2A77 /* SampleRangeSliderApp.swift */,
 				032EF14527E44FFD007F2A77 /* ContentView.swift */,
 				032EF14727E44FFE007F2A77 /* Assets.xcassets */,
@@ -128,14 +125,6 @@
 				032EF16027E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift */,
 			);
 			path = SampleRangeSliderUITests;
-			sourceTree = "<group>";
-		};
-		032EF16D27E4501C007F2A77 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				032EF16E27E4501C007F2A77 /* SliderHandleViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,7 +262,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				032EF14627E44FFD007F2A77 /* ContentView.swift in Sources */,
-				032EF16F27E4501C007F2A77 /* SliderHandleViewModel.swift in Sources */,
 				032EF14427E44FFD007F2A77 /* SampleRangeSliderApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
