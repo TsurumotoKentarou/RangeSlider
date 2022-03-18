@@ -57,7 +57,9 @@ struct RangeSliderContentView: View {
                     
                     SliderHandleView(viewModel: lowViewModel)
                         .highPriorityGesture(DragGesture().onChanged({ value in
-                            lowViewModel.onChangedDrag(location: value.location)
+                            withAnimation(.spring(response: 0.0, dampingFraction: 1.0)) {
+                                lowViewModel.onChangedDrag(location: value.location)
+                            }
                             lowValue = lowViewModel.currentValue
                             onEditingChanged(false, true)
                         }).onEnded({ value in
@@ -68,7 +70,9 @@ struct RangeSliderContentView: View {
                     
                     SliderHandleView(viewModel: highViewModel)
                         .highPriorityGesture(DragGesture().onChanged({ value in
-                            highViewModel.onChangedDrag(location: value.location)
+                            withAnimation(.spring(response: 0.0, dampingFraction: 1.0)) {
+                                highViewModel.onChangedDrag(location: value.location)
+                            }
                             highValue = highViewModel.currentValue
                             onEditingChanged(true, true)
                         }).onEnded({ value in
