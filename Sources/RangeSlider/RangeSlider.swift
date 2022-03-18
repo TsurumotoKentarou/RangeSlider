@@ -20,6 +20,14 @@ public struct RangeSlider: View {
     
     public let onEditingChanged: (_ isHigh: Bool, _ isEditing: Bool) -> Void
     
+    /// Initialization
+    /// - Parameters:
+    ///   - highValue: high slider value
+    ///   - lowValue: low slider value
+    ///   - bounds: the range of slider value
+    ///   - tintColor: tint color inside the slider range
+    ///   - unableTintColor: tint color outside the slider range
+    ///   - onEditingChanged: called when Slider value is changed
     public init(highValue: Binding<Float>,
                 lowValue: Binding<Float>,
                 bounds: ClosedRange<Float>,
