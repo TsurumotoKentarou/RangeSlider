@@ -14,6 +14,11 @@
 		032EF15527E44FFE007F2A77 /* SampleRangeSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF15427E44FFE007F2A77 /* SampleRangeSliderTests.swift */; };
 		032EF15F27E44FFE007F2A77 /* SampleRangeSliderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF15E27E44FFE007F2A77 /* SampleRangeSliderUITests.swift */; };
 		032EF16127E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 032EF16027E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift */; };
+		03C2A72427E46F0500DB61AC /* RangeSliderContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A71F27E46F0500DB61AC /* RangeSliderContentView.swift */; };
+		03C2A72527E46F0500DB61AC /* SliderHandleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72027E46F0500DB61AC /* SliderHandleViewModel.swift */; };
+		03C2A72627E46F0500DB61AC /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72127E46F0500DB61AC /* RangeSlider.swift */; };
+		03C2A72727E46F0500DB61AC /* SliderHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72227E46F0500DB61AC /* SliderHandleView.swift */; };
+		03C2A72827E46F0500DB61AC /* SliderPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72327E46F0500DB61AC /* SliderPathView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +49,11 @@
 		032EF15A27E44FFE007F2A77 /* SampleRangeSliderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleRangeSliderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		032EF15E27E44FFE007F2A77 /* SampleRangeSliderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRangeSliderUITests.swift; sourceTree = "<group>"; };
 		032EF16027E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleRangeSliderUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		03C2A71F27E46F0500DB61AC /* RangeSliderContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSliderContentView.swift; sourceTree = "<group>"; };
+		03C2A72027E46F0500DB61AC /* SliderHandleViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandleViewModel.swift; sourceTree = "<group>"; };
+		03C2A72127E46F0500DB61AC /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
+		03C2A72227E46F0500DB61AC /* SliderHandleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandleView.swift; sourceTree = "<group>"; };
+		03C2A72327E46F0500DB61AC /* SliderPathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderPathView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +84,7 @@
 		032EF13727E44FFD007F2A77 = {
 			isa = PBXGroup;
 			children = (
+				03C2A71E27E46F0500DB61AC /* RangeSlider */,
 				032EF14227E44FFD007F2A77 /* SampleRangeSlider */,
 				032EF15327E44FFE007F2A77 /* SampleRangeSliderTests */,
 				032EF15D27E44FFE007F2A77 /* SampleRangeSliderUITests */,
@@ -125,6 +136,19 @@
 				032EF16027E44FFE007F2A77 /* SampleRangeSliderUITestsLaunchTests.swift */,
 			);
 			path = SampleRangeSliderUITests;
+			sourceTree = "<group>";
+		};
+		03C2A71E27E46F0500DB61AC /* RangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				03C2A71F27E46F0500DB61AC /* RangeSliderContentView.swift */,
+				03C2A72027E46F0500DB61AC /* SliderHandleViewModel.swift */,
+				03C2A72127E46F0500DB61AC /* RangeSlider.swift */,
+				03C2A72227E46F0500DB61AC /* SliderHandleView.swift */,
+				03C2A72327E46F0500DB61AC /* SliderPathView.swift */,
+			);
+			name = RangeSlider;
+			path = ../Sources/RangeSlider;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -261,8 +285,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03C2A72427E46F0500DB61AC /* RangeSliderContentView.swift in Sources */,
+				03C2A72627E46F0500DB61AC /* RangeSlider.swift in Sources */,
+				03C2A72527E46F0500DB61AC /* SliderHandleViewModel.swift in Sources */,
+				03C2A72727E46F0500DB61AC /* SliderHandleView.swift in Sources */,
 				032EF14627E44FFD007F2A77 /* ContentView.swift in Sources */,
 				032EF14427E44FFD007F2A77 /* SampleRangeSliderApp.swift in Sources */,
+				03C2A72827E46F0500DB61AC /* SliderPathView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
