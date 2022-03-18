@@ -40,7 +40,6 @@ class SliderHandleViewModel: ObservableObject {
     }
     
     func onChangedDrag(location: CGPoint) {
-        
         updateLocation(location)
     }
     
