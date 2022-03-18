@@ -14,7 +14,7 @@ struct SliderHandleView: View {
         Circle()
             .frame(width: SliderHandleViewModel.diameter, height: SliderHandleViewModel.diameter)
             .foregroundColor(.white)
-            .shadow(color: Color.black.opacity(0.15), radius: 8, x: 0, y: 0)
+            .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 0)
             .contentShape(Rectangle())
             .position(x: viewModel.currentLocation.x, y: viewModel.currentLocation.y)
     }
