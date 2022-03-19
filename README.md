@@ -12,7 +12,7 @@ A slider that can stand for range using two Sliders.
 * Use two sliders to represent a range
 
 ## Demo
-![slider_sample](https://user-images.githubusercontent.com/15685633/158965500-80df8a21-c5b5-430c-9fe1-d1822beebefc.gif)
+![slider_sample](https://user-images.githubusercontent.com/15685633/159122715-ae3eb316-0911-4a38-b9e1-7a7776943f58.gif)
 
 ## Requirement
 iOS 14 or later.
@@ -20,7 +20,11 @@ iOS 14 or later.
 ## Usage
 
 ``` swift
-RangeSlider(highValue: $highValue, lowValue: $lowValue, bounds: 0...300, onEditingChanged: { isHigh, isEditing in
+RangeSlider(highValue: $highValue,
+            lowValue: $lowValue,
+            bounds: 200...300,
+            isOverRange: isOverRange,
+            onEditingChanged: { isHigh, isEditing in
     // `isHigh` is high or low slider.
     // `isEditing` represent whether editing is in progress
 })
