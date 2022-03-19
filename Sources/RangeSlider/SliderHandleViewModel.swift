@@ -14,7 +14,7 @@ class SliderHandleViewModel: ObservableObject {
     let sliderHeight: CGFloat
     
     // Slider Value Range
-    let sliderValueRange: ClosedRange<Float>
+    let sliderValueRange: ClosedRange<CGFloat>
     
     // Slider circle diameter
     let sliderDiameter: CGFloat
@@ -34,21 +34,23 @@ class SliderHandleViewModel: ObservableObject {
     @Published var currentLocation: CGPoint {
         didSet {
             // diameter分位置がずれているので、最小値を0にしてからパーセント計算をする
-            let percent = Float((currentLocation.x - minLocationX) / (maxLocationX - minLocationX))
-            currentValue = (sliderValueRange.upperBound - sliderValueRange.lowerBound) * percent + sliderValueRange.lowerBound
+            let percent = (currentLocation.x - minLocationX) / (maxLocationX - minLocationX)
+            currentValue = Float((sliderValueRange.upperBound - sliderValueRange.lowerBound) * percent + sliderValueRange.lowerBound)
         }
     }
     
     // Current Slider Value
     @Published var currentValue: Float = 0.0
     
-    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderDiameter: CGFloat, sliderValueRange: ClosedRange<Float>, startValue: CGFloat) {
+    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderDiameter: CGFloat, sliderValueRange: ClosedRange<CGFloat>, startValue: CGFloat) {
         self.sliderWidth = sliderWidth
         self.sliderHeight = sliderHeight
         self.sliderDiameter = sliderDiameter
         self.sliderValueRange = sliderValueRange
         
-        let x = max(min(startValue, sliderWidth - sliderDiameter / 2), sliderDiameter / 2)
+        let startValueRate = (startValue - sliderValueRange.lowerBound) / (sliderValueRange.upperBound - sliderValueRange.lowerBound)
+        let startX = startValueRate * sliderWidth
+        let x = max(min(startX, sliderWidth - sliderDiameter / 2), sliderDiameter / 2)
         self.currentLocation = CGPoint(x: x, y: sliderHeight / 2)
     }
     

@@ -13,7 +13,7 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            RangeSlider(highValue: $highValue, lowValue: $lowValue, bounds: 0...300, onEditingChanged: { isHigh, isEditing in
+            RangeSlider(highValue: $highValue, lowValue: $lowValue, bounds: 200...300, onEditingChanged: { isHigh, isEditing in
                 let highStr = isHigh ? "high" : "low"
                 let editStr = isEditing ? "editing" : "ended"
                 let value = isHigh ? highValue : lowValue

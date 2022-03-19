@@ -30,7 +30,7 @@ struct RangeSliderContentView: View {
          lowValue: Binding<Float>,
          width: CGFloat,
          sliderDiameter: CGFloat,
-         bounds: ClosedRange<Float>,
+         bounds: ClosedRange<CGFloat>,
          tintColor: Color,
          unableTintColor: Color,
          onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {

@@ -12,7 +12,7 @@ public struct RangeSlider: View {
     
     @Binding public var lowValue: Float
     
-    public let bounds: ClosedRange<Float>
+    public let bounds: ClosedRange<CGFloat>
     
     public let tintColor: Color
     
@@ -33,7 +33,7 @@ public struct RangeSlider: View {
     ///   - onEditingChanged: called when Slider value is changed
     public init(highValue: Binding<Float>,
                 lowValue: Binding<Float>,
-                bounds: ClosedRange<Float>,
+                bounds: ClosedRange<CGFloat>,
                 tintColor: Color = Color.blue,
                 unableTintColor: Color = Color(UIColor.label.withAlphaComponent(0.15)),
                 onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
