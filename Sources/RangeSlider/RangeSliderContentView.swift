@@ -8,9 +8,7 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 struct RangeSliderContentView: View {
-    @Binding var highValue: Float
-    
-    @Binding var lowValue: Float
+    @Binding var currentValue: ClosedRange<Float>
     
     let width: CGFloat
     
@@ -30,8 +28,7 @@ struct RangeSliderContentView: View {
     
     @StateObject var highViewModel: SliderHandleViewModel
     
-    init(highValue: Binding<Float>,
-         lowValue: Binding<Float>,
+    init(currentValue: Binding<ClosedRange<Float>>,
          width: CGFloat,
          sliderDiameter: CGFloat,
          sliderValueRange: ClosedRange<Float>,
@@ -39,41 +36,47 @@ struct RangeSliderContentView: View {
          tintColor: Color,
          unableTintColor: Color,
          onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
+        _currentValue = currentValue
         self.width = width
         self.tintColor = tintColor
         self.sliderValueRange = sliderValueRange
         self.isOverRange = isOverRange
         self.unableTintColor = unableTintColor
-        _highValue = highValue
-        _lowValue = lowValue
+
         self.onEditingChanged = onEditingChanged
         
-        let lowUpper = isOverRange ? CGFloat(sliderValueRange.upperBound) : CGFloat(highValue.wrappedValue)
+        let lowUpper = isOverRange ? CGFloat(sliderValueRange.upperBound) : CGFloat(currentValue.wrappedValue.upperBound)
         let lowLower = CGFloat(sliderValueRange.lowerBound)
         let highUpper = CGFloat(sliderValueRange.upperBound)
-        let highLower = isOverRange ? CGFloat(sliderValueRange.lowerBound) : CGFloat(lowValue.wrappedValue)
+        let highLower = isOverRange ? CGFloat(sliderValueRange.lowerBound) : CGFloat(currentValue.wrappedValue.lowerBound)
         
         _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                         sliderHeight: RangeSliderContentView.sliderHeight,
                                                         sliderDiameter: sliderDiameter,
                                                         sliderValueRange: CGFloat(sliderValueRange.lowerBound)...CGFloat(sliderValueRange.upperBound),
                                                         sliderValueLimitRange: lowLower...lowUpper,
-                                                        startValue: CGFloat(lowValue.wrappedValue)))
+                                                        startValue: CGFloat(currentValue.wrappedValue.lowerBound)))
         _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                          sliderHeight: RangeSliderContentView.sliderHeight,
                                                          sliderDiameter: sliderDiameter,
                                                          sliderValueRange: CGFloat(sliderValueRange.lowerBound)...CGFloat(sliderValueRange.upperBound),
                                                          sliderValueLimitRange: highLower...highUpper,
-                                                         startValue: CGFloat(highValue.wrappedValue)))
+                                                         startValue: CGFloat(currentValue.wrappedValue.upperBound)))
     }
     
     private func updateLimitRange() {
-        let lowUpper = isOverRange ? CGFloat(sliderValueRange.upperBound) : CGFloat(highValue)
+        let lowUpper = isOverRange ? CGFloat(sliderValueRange.upperBound) : CGFloat(currentValue.upperBound)
         let lowLower = CGFloat(sliderValueRange.lowerBound)
         let highUpper = CGFloat(sliderValueRange.upperBound)
-        let highLower = isOverRange ? CGFloat(sliderValueRange.lowerBound) : CGFloat(lowValue)
+        let highLower = isOverRange ? CGFloat(sliderValueRange.lowerBound) : CGFloat(currentValue.lowerBound)
         lowViewModel.sliderValueLimitRange = lowLower...lowUpper
         highViewModel.sliderValueLimitRange = highLower...highUpper
+    }
+    
+    private func updateCurrentValue() {
+        let high = max(lowViewModel.currentValue, highViewModel.currentValue)
+        let low = min(lowViewModel.currentValue, highViewModel.currentValue)
+        currentValue = low...high
     }
     
     var body: some View {
@@ -93,11 +96,11 @@ struct RangeSliderContentView: View {
                                 lowViewModel.onChangedDrag(location: value.location)
                                 updateLimitRange()
                             }
-                            lowValue = lowViewModel.currentValue
+                            updateCurrentValue()
                             onEditingChanged(false, true)
                         }).onEnded({ value in
                             lowViewModel.onEndedDrag()
-                            lowValue = lowViewModel.currentValue
+                            updateCurrentValue()
                             onEditingChanged(false, false)
                         }))
                     
@@ -107,11 +110,11 @@ struct RangeSliderContentView: View {
                                 highViewModel.onChangedDrag(location: value.location)
                                 updateLimitRange()
                             }
-                            highValue = highViewModel.currentValue
+                            updateCurrentValue()
                             onEditingChanged(true, true)
                         }).onEnded({ value in
                             highViewModel.onEndedDrag()
-                            highValue = highViewModel.currentValue
+                            updateCurrentValue()
                             onEditingChanged(true, false)
                         }))
                 }

@@ -8,29 +8,24 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var highValue: Float = 400
-    @State var lowValue: Float = 100
+    @State var currentValue: ClosedRange<Float> = 100...400
     @State var isOverRange: Bool = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
-            RangeSlider(highValue: $highValue,
-                        lowValue: $lowValue,
+            RangeSlider(currentValue: $currentValue,
                         bounds: 200...300,
                         isOverRange: isOverRange,
                         onEditingChanged: { isHigh, isEditing in
-                let highStr = isHigh ? "high" : "low"
                 let editStr = isEditing ? "editing" : "ended"
-                let value = isHigh ? highValue : lowValue
-                print(highStr + " " + editStr + " \(value)")
+                print("\(currentValue)" + " " + editStr)
             })
             
             HStack {
-                Text(String(format: "%.2f", lowValue))
+                Text(String(format: "%.2f", currentValue.lowerBound))
                 Spacer()
-                Text(String(format: "%.2f", highValue))
+                Text(String(format: "%.2f", currentValue.upperBound))
             }
-            
             
             Toggle("is over range:", isOn: $isOverRange)
         }

@@ -8,9 +8,7 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 public struct RangeSlider: View {
-    @Binding public var highValue: Float
-    
-    @Binding public var lowValue: Float
+    @Binding public var currentValue: ClosedRange<Float>
     
     public let bounds: ClosedRange<Float>
     
@@ -27,22 +25,19 @@ public struct RangeSlider: View {
     
     /// Initialization
     /// - Parameters:
-    ///   - highValue: high slider value
-    ///   - lowValue: low slider value
+    ///   - currentValue: slider range value
     ///   - bounds: the range of slider value
     ///   - isOverRange: if true, the slider circle can exceed the other
     ///   - tintColor: tint color inside the slider range
     ///   - unableTintColor: tint color outside the slider range
     ///   - onEditingChanged: called when Slider value is changed
-    public init(highValue: Binding<Float>,
-                lowValue: Binding<Float>,
+    public init(currentValue: Binding<ClosedRange<Float>>,
                 bounds: ClosedRange<Float>,
                 isOverRange: Bool = false,
                 tintColor: Color = Color.blue,
                 unableTintColor: Color = Color(UIColor.label.withAlphaComponent(0.15)),
                 onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
-        _highValue = highValue
-        _lowValue = lowValue
+        _currentValue = currentValue
         self.bounds = bounds
         self.isOverRange = isOverRange
         self.tintColor = tintColor
@@ -52,8 +47,7 @@ public struct RangeSlider: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            RangeSliderContentView(highValue: $highValue,
-                                   lowValue: $lowValue,
+            RangeSliderContentView(currentValue: $currentValue,
                                    width: geometry.size.width,
                                    sliderDiameter: sliderDiameter,
                                    sliderValueRange: bounds,
