@@ -52,11 +52,12 @@ public struct RangeSlider: View {
                                    width: geometry.size.width,
                                    sliderDiameter: sliderDiameter,
                                    sliderValueRange: bounds,
+                                   isOverRange: true,
                                    tintColor: tintColor,
                                    unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)
             }
-            // 真ん中にする
+            // to center
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
         }
         .frame(height: sliderDiameter)

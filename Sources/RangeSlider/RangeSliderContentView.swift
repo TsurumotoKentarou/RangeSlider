@@ -16,6 +16,8 @@ struct RangeSliderContentView: View {
     
     let sliderValueRange: ClosedRange<CGFloat>
     
+    let isOverRange: Bool
+    
     let tintColor: Color
     
     let unableTintColor: Color
@@ -33,29 +35,45 @@ struct RangeSliderContentView: View {
          width: CGFloat,
          sliderDiameter: CGFloat,
          sliderValueRange: ClosedRange<CGFloat>,
+         isOverRange: Bool,
          tintColor: Color,
          unableTintColor: Color,
          onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
         self.width = width
         self.tintColor = tintColor
         self.sliderValueRange = sliderValueRange
+        self.isOverRange = isOverRange
         self.unableTintColor = unableTintColor
         _highValue = highValue
         _lowValue = lowValue
         self.onEditingChanged = onEditingChanged
         
+        let lowUpper = isOverRange ? CGFloat(highValue.wrappedValue) : sliderValueRange.upperBound
+        let lowLower = isOverRange ? sliderValueRange.lowerBound : sliderValueRange.lowerBound
+        let highUpper = isOverRange ? sliderValueRange.upperBound : sliderValueRange.upperBound
+        let highLower = isOverRange ? CGFloat(lowValue.wrappedValue) : sliderValueRange.lowerBound
+        
         _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                         sliderHeight: RangeSliderContentView.sliderHeight,
                                                         sliderDiameter: sliderDiameter,
                                                         sliderValueRange: sliderValueRange,
-                                                        sliderValueLimitRange: sliderValueRange.lowerBound...CGFloat(highValue.wrappedValue),
+                                                        sliderValueLimitRange: lowLower...lowUpper,
                                                         startValue: CGFloat(lowValue.wrappedValue)))
         _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                          sliderHeight: RangeSliderContentView.sliderHeight,
                                                          sliderDiameter: sliderDiameter,
                                                          sliderValueRange: sliderValueRange,
-                                                         sliderValueLimitRange: CGFloat(lowValue.wrappedValue)...sliderValueRange.upperBound,
+                                                         sliderValueLimitRange: highLower...highUpper,
                                                          startValue: CGFloat(highValue.wrappedValue)))
+    }
+    
+    private func updateLimitRange() {
+        let lowUpper = isOverRange ? CGFloat(highValue) : sliderValueRange.upperBound
+        let lowLower = isOverRange ? sliderValueRange.lowerBound : sliderValueRange.lowerBound
+        let highUpper = isOverRange ? sliderValueRange.upperBound : sliderValueRange.upperBound
+        let highLower = isOverRange ? CGFloat(lowValue) : sliderValueRange.lowerBound
+        lowViewModel.sliderValueLimitRange = lowLower...lowUpper
+        highViewModel.sliderValueLimitRange = highLower...highUpper
     }
     
     var body: some View {
@@ -73,7 +91,7 @@ struct RangeSliderContentView: View {
                         .highPriorityGesture(DragGesture().onChanged({ value in
                             withAnimation(.spring(response: 0.1, dampingFraction: 1.0)) {
                                 lowViewModel.onChangedDrag(location: value.location)
-                                highViewModel.sliderValueLimitRange = CGFloat(lowViewModel.currentValue)...CGFloat(sliderValueRange.upperBound)
+                                updateLimitRange()
                             }
                             lowValue = lowViewModel.currentValue
                             onEditingChanged(false, true)
@@ -87,7 +105,7 @@ struct RangeSliderContentView: View {
                         .highPriorityGesture(DragGesture().onChanged({ value in
                             withAnimation(.spring(response: 0.1, dampingFraction: 1.0)) {
                                 highViewModel.onChangedDrag(location: value.location)
-                                lowViewModel.sliderValueLimitRange = CGFloat(sliderValueRange.lowerBound)...CGFloat(highViewModel.currentValue)
+                                updateLimitRange()
                             }
                             highValue = highViewModel.currentValue
                             onEditingChanged(true, true)
