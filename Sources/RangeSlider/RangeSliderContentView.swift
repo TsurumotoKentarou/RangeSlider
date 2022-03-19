@@ -53,12 +53,15 @@ struct RangeSliderContentView: View {
         _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                         sliderHeight: RangeSliderContentView.sliderHeight,
                                                         sliderDiameter: sliderDiameter,
+                                                        service: SliderHandleServiceImpl(),
                                                         sliderValueRange: CGFloat(sliderValueRange.lowerBound)...CGFloat(sliderValueRange.upperBound),
                                                         sliderValueLimitRange: lowLower...lowUpper,
                                                         startValue: CGFloat(currentValue.wrappedValue.lowerBound)))
+        
         _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                          sliderHeight: RangeSliderContentView.sliderHeight,
                                                          sliderDiameter: sliderDiameter,
+                                                         service: SliderHandleServiceImpl(),
                                                          sliderValueRange: CGFloat(sliderValueRange.lowerBound)...CGFloat(sliderValueRange.upperBound),
                                                          sliderValueLimitRange: highLower...highUpper,
                                                          startValue: CGFloat(currentValue.wrappedValue.upperBound)))

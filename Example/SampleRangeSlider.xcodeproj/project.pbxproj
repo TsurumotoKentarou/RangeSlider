@@ -19,6 +19,7 @@
 		03C2A72627E46F0500DB61AC /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72127E46F0500DB61AC /* RangeSlider.swift */; };
 		03C2A72727E46F0500DB61AC /* SliderHandleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72227E46F0500DB61AC /* SliderHandleView.swift */; };
 		03C2A72827E46F0500DB61AC /* SliderPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03C2A72327E46F0500DB61AC /* SliderPathView.swift */; };
+		03CCD5AF27E61F970084E2E2 /* SliderHandleService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03CCD5AE27E61F970084E2E2 /* SliderHandleService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		03C2A72127E46F0500DB61AC /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		03C2A72227E46F0500DB61AC /* SliderHandleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderHandleView.swift; sourceTree = "<group>"; };
 		03C2A72327E46F0500DB61AC /* SliderPathView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderPathView.swift; sourceTree = "<group>"; };
+		03CCD5AE27E61F970084E2E2 /* SliderHandleService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderHandleService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +148,7 @@
 				03C2A72127E46F0500DB61AC /* RangeSlider.swift */,
 				03C2A72227E46F0500DB61AC /* SliderHandleView.swift */,
 				03C2A72327E46F0500DB61AC /* SliderPathView.swift */,
+				03CCD5AE27E61F970084E2E2 /* SliderHandleService.swift */,
 			);
 			name = RangeSlider;
 			path = ../Sources/RangeSlider;
@@ -289,6 +292,7 @@
 				03C2A72627E46F0500DB61AC /* RangeSlider.swift in Sources */,
 				03C2A72527E46F0500DB61AC /* SliderHandleViewModel.swift in Sources */,
 				03C2A72727E46F0500DB61AC /* SliderHandleView.swift in Sources */,
+				03CCD5AF27E61F970084E2E2 /* SliderHandleService.swift in Sources */,
 				032EF14627E44FFD007F2A77 /* ContentView.swift in Sources */,
 				032EF14427E44FFD007F2A77 /* SampleRangeSliderApp.swift in Sources */,
 				03C2A72827E46F0500DB61AC /* SliderPathView.swift in Sources */,

@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var currentValue: ClosedRange<Float> = 100...400
+    @State var currentValue: ClosedRange<Float> = 200...400
     @State var isOverRange: Bool = false
     
     var body: some View {
         VStack(alignment: .center, spacing: 40) {
             RangeSlider(currentValue: $currentValue,
-                        bounds: 200...300,
+                        bounds: 100...500,
                         isOverRange: isOverRange,
                         onEditingChanged: { isHigh, isEditing in
                 let editStr = isEditing ? "editing" : "ended"

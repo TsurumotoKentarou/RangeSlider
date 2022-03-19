@@ -25,6 +25,9 @@ class SliderHandleViewModel: ObservableObject {
         return sliderDiameter / 2
     }
     
+    // service class
+    private let service: SliderHandleService
+    
     // Slider limit location
     private var minLocationX: CGFloat {
         return circleRadius
@@ -51,19 +54,25 @@ class SliderHandleViewModel: ObservableObject {
     init(sliderWidth: CGFloat,
          sliderHeight: CGFloat,
          sliderDiameter: CGFloat,
+         service: SliderHandleService,
          sliderValueRange: ClosedRange<CGFloat>,
          sliderValueLimitRange: ClosedRange<CGFloat>,
          startValue: CGFloat) {
         self.sliderWidth = sliderWidth
         self.sliderHeight = sliderHeight
         self.sliderDiameter = sliderDiameter
+        self.service = service
         self.sliderValueRange = sliderValueRange
         self.sliderValueLimitRange = sliderValueLimitRange
         
-        let startValueRate = (startValue - sliderValueRange.lowerBound) / (sliderValueRange.upperBound - sliderValueRange.lowerBound)
-        let startX = startValueRate * sliderWidth
-        let x = max(min(startX, sliderWidth - sliderDiameter / 2), sliderDiameter / 2)
+        let minLocationX = sliderDiameter / 2
+        let maxLocationX = sliderWidth - minLocationX
+        let startLocationX = service.toLocation(sliderValue: startValue, minLocationX: minLocationX, maxLocationX: maxLocationX, sliderValueRange: sliderValueRange)
+        let x = max(min(startLocationX, maxLocationX), minLocationX)
         self.currentLocation = CGPoint(x: x, y: sliderHeight / 2)
+        
+        let calcStartValue = service.toSliderValue(location: x, minLocationX: minLocationX, maxLocationX: maxLocationX, sliderValueRange: sliderValueRange)
+        self.currentValue = Float(calcStartValue)
     }
     
     func onChangedDrag(location: CGPoint) {
@@ -77,28 +86,26 @@ class SliderHandleViewModel: ObservableObject {
     private func updateLocation(_ dragLocation: CGPoint) {
         let x = max(min(dragLocation.x, maxLocationX), minLocationX)
         var newLocationX: CGFloat = x
-        let sliderValue = toSliderValue(location: x)
+        
+        let sliderValue = service.toSliderValue(location: x,
+                                                minLocationX: minLocationX,
+                                                maxLocationX: maxLocationX,
+                                                sliderValueRange: sliderValueRange)
         if (sliderValue < sliderValueLimitRange.lowerBound) {
-            newLocationX = toLocation(sliderValue: sliderValueLimitRange.lowerBound)
+            newLocationX = service.toLocation(sliderValue: sliderValueLimitRange.lowerBound,
+                                                          minLocationX: minLocationX,
+                                                          maxLocationX: maxLocationX,
+                                                          sliderValueRange: sliderValueRange)
         }
         else if sliderValue > sliderValueLimitRange.upperBound {
-            newLocationX = toLocation(sliderValue: sliderValueLimitRange.upperBound)
+            newLocationX = service.toLocation(sliderValue: sliderValueLimitRange.upperBound,
+                                                          minLocationX: minLocationX,
+                                                          maxLocationX: maxLocationX,
+                                                          sliderValueRange: sliderValueRange)
         }
 
         let y = sliderHeight / 2
         
         currentLocation = CGPoint(x: newLocationX, y: y)
-    }
-    
-    private func toSliderValue(location: CGFloat) -> CGFloat {
-        let locationRate = (location - minLocationX) / (maxLocationX - minLocationX)
-        return (sliderValueRange.upperBound - sliderValueRange.lowerBound) * locationRate + sliderValueRange.lowerBound
-    }
-    
-    private func toLocation(sliderValue: CGFloat) -> CGFloat {
-        let lower = sliderValueRange.lowerBound
-        let upper = sliderValueRange.upperBound
-        let sliderValueRate = (sliderValue - lower) / (upper - lower)
-        return (maxLocationX - minLocationX) * sliderValueRate + minLocationX
     }
 }
