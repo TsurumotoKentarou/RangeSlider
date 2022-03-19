@@ -40,8 +40,8 @@ struct RangeSliderContentView: View {
         _lowValue = currentLowPosition
         self.onEditingChanged = onEditingChanged
         
-        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderRange: bounds, startLocation: 0))
-        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderRange: bounds, startLocation: width))
+        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startLocation: 0))
+        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startLocation: width))
     }
     
     var body: some View {
