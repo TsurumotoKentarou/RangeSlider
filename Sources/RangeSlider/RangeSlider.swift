@@ -51,7 +51,7 @@ public struct RangeSlider: View {
                                    lowValue: $lowValue,
                                    width: geometry.size.width,
                                    sliderDiameter: sliderDiameter,
-                                   bounds: bounds,
+                                   sliderValueRange: bounds,
                                    tintColor: tintColor,
                                    unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)

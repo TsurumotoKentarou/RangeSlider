@@ -32,13 +32,13 @@ struct RangeSliderContentView: View {
          lowValue: Binding<Float>,
          width: CGFloat,
          sliderDiameter: CGFloat,
-         bounds: ClosedRange<CGFloat>,
+         sliderValueRange: ClosedRange<CGFloat>,
          tintColor: Color,
          unableTintColor: Color,
          onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
         self.width = width
         self.tintColor = tintColor
-        self.sliderValueRange = bounds
+        self.sliderValueRange = sliderValueRange
         self.unableTintColor = unableTintColor
         _highValue = highValue
         _lowValue = lowValue
@@ -47,14 +47,14 @@ struct RangeSliderContentView: View {
         _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                         sliderHeight: RangeSliderContentView.sliderHeight,
                                                         sliderDiameter: sliderDiameter,
-                                                        sliderValueRange: bounds,
-                                                        sliderValueLimitRange: bounds.lowerBound...CGFloat(highValue.wrappedValue),
+                                                        sliderValueRange: sliderValueRange,
+                                                        sliderValueLimitRange: sliderValueRange.lowerBound...CGFloat(highValue.wrappedValue),
                                                         startValue: CGFloat(lowValue.wrappedValue)))
         _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                          sliderHeight: RangeSliderContentView.sliderHeight,
                                                          sliderDiameter: sliderDiameter,
-                                                         sliderValueRange: bounds,
-                                                         sliderValueLimitRange: CGFloat(lowValue.wrappedValue)...bounds.upperBound,
+                                                         sliderValueRange: sliderValueRange,
+                                                         sliderValueLimitRange: CGFloat(lowValue.wrappedValue)...sliderValueRange.upperBound,
                                                          startValue: CGFloat(highValue.wrappedValue)))
     }
     
