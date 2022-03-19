@@ -39,12 +39,12 @@ class SliderHandleViewModel: ObservableObject {
     // Current Slider Value
     @Published var currentValue: Float = 0.0
     
-    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderValueRange: ClosedRange<Float>, startLocation: CGFloat) {
+    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderValueRange: ClosedRange<Float>, startValue: CGFloat) {
         self.sliderWidth = sliderWidth
         self.sliderHeight = sliderHeight
         self.sliderValueRange = sliderValueRange
         
-        let x = max(min(startLocation, sliderWidth - SliderHandleViewModel.diameter / 2), SliderHandleViewModel.diameter / 2)
+        let x = max(min(startValue, sliderWidth - SliderHandleViewModel.diameter / 2), SliderHandleViewModel.diameter / 2)
         self.currentLocation = CGPoint(x: x, y: sliderHeight / 2)
     }
     

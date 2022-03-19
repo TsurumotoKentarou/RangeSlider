@@ -44,7 +44,7 @@ public struct RangeSlider: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            RangeSliderContentView(currentHighPosition: $highValue, currentLowPosition: $lowValue, width: geometry.size.width, bounds: bounds, tintColor: tintColor, unableTintColor: unableTintColor) { isHigh, isEditing in
+            RangeSliderContentView(highValue: $highValue, lowValue: $lowValue, width: geometry.size.width, bounds: bounds, tintColor: tintColor, unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)
             }
             // 真ん中にする

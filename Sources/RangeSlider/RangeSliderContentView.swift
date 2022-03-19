@@ -26,8 +26,8 @@ struct RangeSliderContentView: View {
     
     @StateObject var highViewModel: SliderHandleViewModel
     
-    init(currentHighPosition: Binding<Float>,
-         currentLowPosition: Binding<Float>,
+    init(highValue: Binding<Float>,
+         lowValue: Binding<Float>,
          width: CGFloat,
          bounds: ClosedRange<Float>,
          tintColor: Color,
@@ -36,12 +36,12 @@ struct RangeSliderContentView: View {
         self.width = width
         self.tintColor = tintColor
         self.unableTintColor = unableTintColor
-        _highValue = currentHighPosition
-        _lowValue = currentLowPosition
+        _highValue = highValue
+        _lowValue = lowValue
         self.onEditingChanged = onEditingChanged
         
-        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startLocation: 0))
-        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startLocation: width))
+        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startValue: CGFloat(lowValue.wrappedValue)))
+        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startValue: CGFloat(highValue.wrappedValue)))
     }
     
     var body: some View {

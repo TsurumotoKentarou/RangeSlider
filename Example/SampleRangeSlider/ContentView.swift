@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State var highValue: Float = 0.0
-    @State var lowValue: Float = 0.0
+    @State var highValue: Float = 250.0
+    @State var lowValue: Float = 100
     
     var body: some View {
         VStack {
