@@ -29,6 +29,7 @@ struct RangeSliderContentView: View {
     init(highValue: Binding<Float>,
          lowValue: Binding<Float>,
          width: CGFloat,
+         sliderDiameter: CGFloat,
          bounds: ClosedRange<Float>,
          tintColor: Color,
          unableTintColor: Color,
@@ -40,8 +41,8 @@ struct RangeSliderContentView: View {
         _lowValue = lowValue
         self.onEditingChanged = onEditingChanged
         
-        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startValue: CGFloat(lowValue.wrappedValue)))
-        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderValueRange: bounds, startValue: CGFloat(highValue.wrappedValue)))
+        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderDiameter: sliderDiameter, sliderValueRange: bounds, startValue: CGFloat(lowValue.wrappedValue)))
+        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width, sliderHeight: RangeSliderContentView.sliderHeight, sliderDiameter: sliderDiameter, sliderValueRange: bounds, startValue: CGFloat(highValue.wrappedValue)))
     }
     
     var body: some View {

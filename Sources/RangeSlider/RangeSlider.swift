@@ -20,6 +20,9 @@ public struct RangeSlider: View {
     
     public let onEditingChanged: (_ isHigh: Bool, _ isEditing: Bool) -> Void
     
+    // Slider circle diameter
+    private let sliderDiameter: CGFloat = 28
+    
     /// Initialization
     /// - Parameters:
     ///   - highValue: high slider value
@@ -44,12 +47,18 @@ public struct RangeSlider: View {
     
     public var body: some View {
         GeometryReader { geometry in
-            RangeSliderContentView(highValue: $highValue, lowValue: $lowValue, width: geometry.size.width, bounds: bounds, tintColor: tintColor, unableTintColor: unableTintColor) { isHigh, isEditing in
+            RangeSliderContentView(highValue: $highValue,
+                                   lowValue: $lowValue,
+                                   width: geometry.size.width,
+                                   sliderDiameter: sliderDiameter,
+                                   bounds: bounds,
+                                   tintColor: tintColor,
+                                   unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)
             }
             // 真ん中にする
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
         }
-        .frame(height: SliderHandleViewModel.diameter)
+        .frame(height: sliderDiameter)
     }
 }

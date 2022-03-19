@@ -16,16 +16,19 @@ class SliderHandleViewModel: ObservableObject {
     // Slider Value Range
     let sliderValueRange: ClosedRange<Float>
     
-    // Slider limit location
-    private var minLocationX: CGFloat {
-        return SliderHandleViewModel.diameter / 2
-    }
-    private var maxLocationX: CGFloat {
-        return sliderWidth - SliderHandleViewModel.diameter / 2
+    // Slider circle diameter
+    let sliderDiameter: CGFloat
+    private var circleRadius: CGFloat {
+        return sliderDiameter / 2
     }
     
-    // Slider circle diameter
-    static let diameter: CGFloat = 28
+    // Slider limit location
+    private var minLocationX: CGFloat {
+        return circleRadius
+    }
+    private var maxLocationX: CGFloat {
+        return sliderWidth - circleRadius
+    }
     
     // Current Slider Location
     @Published var currentLocation: CGPoint {
@@ -39,12 +42,13 @@ class SliderHandleViewModel: ObservableObject {
     // Current Slider Value
     @Published var currentValue: Float = 0.0
     
-    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderValueRange: ClosedRange<Float>, startValue: CGFloat) {
+    init(sliderWidth: CGFloat, sliderHeight: CGFloat, sliderDiameter: CGFloat, sliderValueRange: ClosedRange<Float>, startValue: CGFloat) {
         self.sliderWidth = sliderWidth
         self.sliderHeight = sliderHeight
+        self.sliderDiameter = sliderDiameter
         self.sliderValueRange = sliderValueRange
         
-        let x = max(min(startValue, sliderWidth - SliderHandleViewModel.diameter / 2), SliderHandleViewModel.diameter / 2)
+        let x = max(min(startValue, sliderWidth - sliderDiameter / 2), sliderDiameter / 2)
         self.currentLocation = CGPoint(x: x, y: sliderHeight / 2)
     }
     

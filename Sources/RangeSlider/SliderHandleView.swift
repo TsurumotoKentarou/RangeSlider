@@ -12,7 +12,7 @@ struct SliderHandleView: View {
     
     var body: some View {
         Circle()
-            .frame(width: SliderHandleViewModel.diameter, height: SliderHandleViewModel.diameter)
+            .frame(width: viewModel.sliderDiameter, height: viewModel.sliderDiameter)
             .foregroundColor(.white)
             .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 0)
             .contentShape(Rectangle())
