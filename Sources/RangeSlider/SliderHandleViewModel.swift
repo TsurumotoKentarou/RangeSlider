@@ -39,9 +39,7 @@ class SliderHandleViewModel: ObservableObject {
     // Current Slider Location
     @Published var currentLocation: CGPoint {
         didSet {
-            // diameter分位置がずれているので、最小値を0にしてからパーセント計算をする
-            let percent = (currentLocation.x - minLocationX) / (maxLocationX - minLocationX)
-            let newValue = (sliderValueRange.upperBound - sliderValueRange.lowerBound) * percent + sliderValueRange.lowerBound
+            let newValue = service.toSliderValue(location: currentLocation.x, minLocationX: minLocationX, maxLocationX: maxLocationX, sliderValueRange: sliderValueRange)
             if sliderValueLimitRange.contains(newValue) {
                 currentValue = Float(newValue)
             }
