@@ -14,6 +14,8 @@ public struct RangeSlider: View {
     
     public let bounds: ClosedRange<CGFloat>
     
+    public let isOverRange: Bool
+    
     public let tintColor: Color
     
     public let unableTintColor: Color
@@ -28,18 +30,21 @@ public struct RangeSlider: View {
     ///   - highValue: high slider value
     ///   - lowValue: low slider value
     ///   - bounds: the range of slider value
+    ///   - isOverRange: if true, the slider circle can exceed the other
     ///   - tintColor: tint color inside the slider range
     ///   - unableTintColor: tint color outside the slider range
     ///   - onEditingChanged: called when Slider value is changed
     public init(highValue: Binding<Float>,
                 lowValue: Binding<Float>,
                 bounds: ClosedRange<CGFloat>,
+                isOverRange: Bool = false,
                 tintColor: Color = Color.blue,
                 unableTintColor: Color = Color(UIColor.label.withAlphaComponent(0.15)),
                 onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
         _highValue = highValue
         _lowValue = lowValue
         self.bounds = bounds
+        self.isOverRange = isOverRange
         self.tintColor = tintColor
         self.unableTintColor = unableTintColor
         self.onEditingChanged = onEditingChanged
@@ -52,7 +57,7 @@ public struct RangeSlider: View {
                                    width: geometry.size.width,
                                    sliderDiameter: sliderDiameter,
                                    sliderValueRange: bounds,
-                                   isOverRange: true,
+                                   isOverRange: isOverRange,
                                    tintColor: tintColor,
                                    unableTintColor: unableTintColor) { isHigh, isEditing in
                 onEditingChanged(isHigh, isEditing)

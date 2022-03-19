@@ -48,10 +48,10 @@ struct RangeSliderContentView: View {
         _lowValue = lowValue
         self.onEditingChanged = onEditingChanged
         
-        let lowUpper = isOverRange ? CGFloat(highValue.wrappedValue) : sliderValueRange.upperBound
-        let lowLower = isOverRange ? sliderValueRange.lowerBound : sliderValueRange.lowerBound
-        let highUpper = isOverRange ? sliderValueRange.upperBound : sliderValueRange.upperBound
-        let highLower = isOverRange ? CGFloat(lowValue.wrappedValue) : sliderValueRange.lowerBound
+        let lowUpper = isOverRange ? sliderValueRange.upperBound: CGFloat(highValue.wrappedValue)
+        let lowLower = isOverRange ? sliderValueRange.lowerBound: sliderValueRange.lowerBound
+        let highUpper = isOverRange ? sliderValueRange.upperBound: sliderValueRange.upperBound
+        let highLower = isOverRange ? sliderValueRange.lowerBound: CGFloat(lowValue.wrappedValue)
         
         _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
                                                         sliderHeight: RangeSliderContentView.sliderHeight,
@@ -68,10 +68,10 @@ struct RangeSliderContentView: View {
     }
     
     private func updateLimitRange() {
-        let lowUpper = isOverRange ? CGFloat(highValue) : sliderValueRange.upperBound
-        let lowLower = isOverRange ? sliderValueRange.lowerBound : sliderValueRange.lowerBound
-        let highUpper = isOverRange ? sliderValueRange.upperBound : sliderValueRange.upperBound
-        let highLower = isOverRange ? CGFloat(lowValue) : sliderValueRange.lowerBound
+        let lowUpper = isOverRange ? sliderValueRange.upperBound: CGFloat(highValue)
+        let lowLower = isOverRange ? sliderValueRange.lowerBound: sliderValueRange.lowerBound
+        let highUpper = isOverRange ? sliderValueRange.upperBound: sliderValueRange.upperBound
+        let highLower = isOverRange ? sliderValueRange.lowerBound: CGFloat(lowValue)
         lowViewModel.sliderValueLimitRange = lowLower...lowUpper
         highViewModel.sliderValueLimitRange = highLower...highUpper
     }
