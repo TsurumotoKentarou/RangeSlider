@@ -82,7 +82,7 @@ struct RangeSliderContentView: View {
             .fill(unableTintColor)
             .frame(width: width, height: RangeSliderContentView.sliderHeight)
             .overlay(
-                ZStack() {
+                ZStack {
                     SliderPathView(currentHighLocation: highViewModel.currentLocation,
                                    currentLowLocation: lowViewModel.currentLocation,
                                    height: RangeSliderContentView.sliderHeight,
