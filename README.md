@@ -26,8 +26,7 @@ iOS 14 or later.
 RangeSlider(currentValue: $currentValue,
             bounds: 100...500,
             isOverRange: isOverRange,
-            onEditingChanged: { isHigh, isEditing in
-    // `isHigh` is high or low slider.
+            onEditingChanged: { isEditing in
     // `isEditing` represent whether editing is in progress
 })
 ```
