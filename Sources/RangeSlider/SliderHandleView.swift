@@ -8,14 +8,17 @@ import SwiftUI
 
 @available(iOS 14.0, *)
 struct SliderHandleView: View {
-    @StateObject var viewModel: SliderHandleViewModel
+    let diamater: CGFloat
+    
+    let location: CGPoint
     
     var body: some View {
         Circle()
-            .frame(width: viewModel.sliderDiameter, height: viewModel.sliderDiameter)
+            .frame(width: diamater,
+                   height: diamater)
             .foregroundColor(.white)
             .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 0)
             .contentShape(Rectangle())
-            .position(x: viewModel.currentLocation.x, y: viewModel.currentLocation.y)
+            .position(x: location.x, y: location.y)
     }
 }

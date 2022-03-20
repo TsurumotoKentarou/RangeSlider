@@ -24,9 +24,9 @@ struct RangeSliderContentView: View {
     
     static let sliderHeight: CGFloat = 4.0
     
-    @StateObject var lowViewModel: SliderHandleViewModel
+    @ObservedObject var lowViewModel: SliderHandleViewModel
     
-    @StateObject var highViewModel: SliderHandleViewModel
+    @ObservedObject var highViewModel: SliderHandleViewModel
     
     init(currentValue: Binding<ClosedRange<Float>>,
          width: CGFloat,
@@ -42,7 +42,6 @@ struct RangeSliderContentView: View {
         self.sliderValueRange = sliderValueRange
         self.isOverRange = isOverRange
         self.unableTintColor = unableTintColor
-
         self.onEditingChanged = onEditingChanged
         
         let lowUpper = isOverRange ? CGFloat(sliderValueRange.upperBound) : CGFloat(currentValue.wrappedValue.upperBound)
@@ -50,15 +49,15 @@ struct RangeSliderContentView: View {
         let highUpper = CGFloat(sliderValueRange.upperBound)
         let highLower = isOverRange ? CGFloat(sliderValueRange.lowerBound) : CGFloat(currentValue.wrappedValue.lowerBound)
         
-        _lowViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
-                                                        sliderHeight: RangeSliderContentView.sliderHeight,
-                                                        sliderDiameter: sliderDiameter,
-                                                        service: SliderHandleServiceImpl(),
-                                                        sliderValueRange: CGFloat(sliderValueRange.lowerBound)...CGFloat(sliderValueRange.upperBound),
-                                                        sliderValueLimitRange: lowLower...lowUpper,
-                                                        startValue: CGFloat(currentValue.wrappedValue.lowerBound)))
+        _lowViewModel = ObservedObject(wrappedValue: .init(sliderWidth: width,
+                                                           sliderHeight: RangeSliderContentView.sliderHeight,
+                                                           sliderDiameter: sliderDiameter,
+                                                           service: SliderHandleServiceImpl(),
+                                                           sliderValueRange: CGFloat(sliderValueRange.lowerBound)...CGFloat(sliderValueRange.upperBound),
+                                                           sliderValueLimitRange: lowLower...lowUpper,
+                                                           startValue: CGFloat(currentValue.wrappedValue.lowerBound)))
         
-        _highViewModel = StateObject(wrappedValue: .init(sliderWidth: width,
+        _highViewModel = ObservedObject(wrappedValue: .init(sliderWidth: width,
                                                          sliderHeight: RangeSliderContentView.sliderHeight,
                                                          sliderDiameter: sliderDiameter,
                                                          service: SliderHandleServiceImpl(),
@@ -93,7 +92,7 @@ struct RangeSliderContentView: View {
                                    height: RangeSliderContentView.sliderHeight,
                                    tintColor: tintColor)
                     
-                    SliderHandleView(viewModel: lowViewModel)
+                    SliderHandleView(diamater: lowViewModel.sliderDiameter, location: lowViewModel.currentLocation)
                         .highPriorityGesture(DragGesture().onChanged({ value in
                             withAnimation(.spring(response: 0.1, dampingFraction: 1.0)) {
                                 lowViewModel.onChangedDrag(location: value.location)
@@ -107,7 +106,7 @@ struct RangeSliderContentView: View {
                             onEditingChanged(false)
                         }))
                     
-                    SliderHandleView(viewModel: highViewModel)
+                    SliderHandleView(diamater: highViewModel.sliderDiameter, location: highViewModel.currentLocation)
                         .highPriorityGesture(DragGesture().onChanged({ value in
                             withAnimation(.spring(response: 0.1, dampingFraction: 1.0)) {
                                 highViewModel.onChangedDrag(location: value.location)
