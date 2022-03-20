@@ -18,7 +18,7 @@ public struct RangeSlider: View {
     
     public let unableTintColor: Color
     
-    public let onEditingChanged: (_ isHigh: Bool, _ isEditing: Bool) -> Void
+    public let onEditingChanged: (_ isEditing: Bool) -> Void
     
     // Slider circle diameter
     private let sliderDiameter: CGFloat = 28
@@ -36,7 +36,7 @@ public struct RangeSlider: View {
                 isOverRange: Bool = false,
                 tintColor: Color = Color.blue,
                 unableTintColor: Color = Color(UIColor.label.withAlphaComponent(0.15)),
-                onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
+                onEditingChanged: @escaping (_ isEditing: Bool) -> Void) {
         _currentValue = currentValue
         self.bounds = bounds
         self.isOverRange = isOverRange
@@ -53,8 +53,8 @@ public struct RangeSlider: View {
                                    sliderValueRange: bounds,
                                    isOverRange: isOverRange,
                                    tintColor: tintColor,
-                                   unableTintColor: unableTintColor) { isHigh, isEditing in
-                onEditingChanged(isHigh, isEditing)
+                                   unableTintColor: unableTintColor) { isEditing in
+                onEditingChanged(isEditing)
             }
             // to center
             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)

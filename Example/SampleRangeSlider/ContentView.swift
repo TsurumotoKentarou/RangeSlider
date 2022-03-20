@@ -16,7 +16,7 @@ struct ContentView: View {
             RangeSlider(currentValue: $currentValue,
                         bounds: 100...500,
                         isOverRange: isOverRange,
-                        onEditingChanged: { isHigh, isEditing in
+                        onEditingChanged: { isEditing in
                 let editStr = isEditing ? "editing" : "ended"
                 print("\(currentValue)" + " " + editStr)
             })

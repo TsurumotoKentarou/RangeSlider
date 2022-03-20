@@ -20,7 +20,7 @@ struct RangeSliderContentView: View {
     
     let unableTintColor: Color
     
-    let onEditingChanged: (_ isHigh: Bool, _ isEditing: Bool) -> Void
+    let onEditingChanged: (_ isEditing: Bool) -> Void
     
     static let sliderHeight: CGFloat = 4.0
     
@@ -35,7 +35,7 @@ struct RangeSliderContentView: View {
          isOverRange: Bool,
          tintColor: Color,
          unableTintColor: Color,
-         onEditingChanged: @escaping (_ isHigh: Bool, _ isEditing: Bool) -> Void) {
+         onEditingChanged: @escaping (_ isEditing: Bool) -> Void) {
         _currentValue = currentValue
         self.width = width
         self.tintColor = tintColor
@@ -100,11 +100,11 @@ struct RangeSliderContentView: View {
                                 updateLimitRange()
                             }
                             updateCurrentValue()
-                            onEditingChanged(false, true)
+                            onEditingChanged(true)
                         }).onEnded({ value in
                             lowViewModel.onEndedDrag()
                             updateCurrentValue()
-                            onEditingChanged(false, false)
+                            onEditingChanged(false)
                         }))
                     
                     SliderHandleView(viewModel: highViewModel)
@@ -114,11 +114,11 @@ struct RangeSliderContentView: View {
                                 updateLimitRange()
                             }
                             updateCurrentValue()
-                            onEditingChanged(true, true)
+                            onEditingChanged(true)
                         }).onEnded({ value in
                             highViewModel.onEndedDrag()
                             updateCurrentValue()
-                            onEditingChanged(true, false)
+                            onEditingChanged(false)
                         }))
                 }
             )
