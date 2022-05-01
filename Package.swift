@@ -24,5 +24,6 @@ let package = Package(
         .testTarget(
             name: "RangeSliderTests",
             dependencies: ["RangeSlider"]),
-    ]
+    ],
+    exclude: ["Example"]
 )
