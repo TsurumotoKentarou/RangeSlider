@@ -6,7 +6,6 @@
 
 import SwiftUI
 
-@available(iOS 14.0, *)
 struct RangeSliderContentView: View {
     @Binding var currentValue: ClosedRange<Float>
     

@@ -7,7 +7,6 @@
 import Combine
 import SwiftUI
 
-@available(iOS 14.0, *)
 class SliderHandleViewModel: ObservableObject {
     // Slider View Size
     let sliderWidth: CGFloat
